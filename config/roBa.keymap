@@ -94,7 +94,7 @@
 
         FUNCTION {
             bindings = <
-&trans     &kp LG(W)  &kp TAB    &kp LG(R)  &kp LC(T)                           &kp F1         &kp LG(U)     &kp LS(LG(KP_NUMBER_3))  &kp LS(LG(KP_NUMBER_4))  &kp F5
+&trans     &kp LG(W)  &kp TAB    &kp LG(R)  &kp LG(T)                           &kp F1         &kp LG(U)     &kp LS(LG(KP_NUMBER_3))  &kp LS(LG(KP_NUMBER_4))  &kp F5
 &trans     &kp LG(S)  &kp LG(D)  &kp LG(F)  &kp LC(SPACE)  &trans      &kp F13  &kp F6         &msc SCRL_UP  &msc SCRL_DOWN           &kp F9                   &kp F10
 &kp LG(Z)  &trans     &kp LG(C)  &kp LG(V)  &kp LG(B)      &trans      &trans   &trans         &trans        &trans                   &trans                   &kp F11
 &trans     &trans     &trans     &trans     &trans         &trans      &trans   &kp RG(ENTER)                                                                  &kp F12
@@ -112,10 +112,10 @@
 
         ARROW {
             bindings = <
-&kp ESCAPE      &kp LC(LS(TAB))         &kp UP_ARROW    &kp LC(TAB)              &kp LC(F)                      &trans  &trans  &trans  &trans  &trans
-&kp HOME        &kp LEFT_ARROW          &kp DOWN_ARROW  &kp RIGHT_ARROW          &kp END    &trans      &trans  &trans  &trans  &trans  &trans  &trans
-&kp LEFT_SHIFT  &kp LG(LS(LEFT_ARROW))  &trans          &kp LG(LS(RIGHT_ARROW))  &trans     &trans      &trans  &trans  &trans  &trans  &trans  &trans
-&trans          &trans                  &trans          &trans                   &trans     &trans      &trans  &trans                          &trans
+&kp ESCAPE      &kp LC(LS(TAB))         &kp UP_ARROW    &kp LC(TAB)              &kp LC(F)                      &kp LC(F)        &kp TAB              &trans              &trans       &trans
+&kp HOME        &kp LEFT_ARROW          &kp DOWN_ARROW  &kp RIGHT_ARROW          &kp END    &trans      &trans  &kp LS(LC(TAB))  &kp LG(RIGHT_ARROW)  &kp LG(LEFT_ARROW)  &kp LC(TAB)  &trans
+&kp LEFT_SHIFT  &kp LG(LS(LEFT_ARROW))  &trans          &kp LG(LS(RIGHT_ARROW))  &trans     &trans      &trans  &trans           &trans               &trans              &trans       &trans
+&trans          &trans                  &trans          &trans                   &trans     &trans      &trans  &trans                                                                 &trans
             >;
 
             sensor-bindings = <&inc_dec_kp LC(PAGE_UP) LC(PAGE_DOWN)>;
