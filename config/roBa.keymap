@@ -65,6 +65,12 @@
             layers = <WIN WIN_FN WIN_NUM WIN_ARROW>;
         };
 
+        muhennkann_mouse {
+            bindings = <&kp INT_MUHENKAN>;
+            key-positions = <11 10>;
+            layers = <MOUSE BT>;
+        };
+
         double_quotation {
             bindings = <&kp DOUBLE_QUOTES>;
             key-positions = <20 21>;
