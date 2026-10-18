@@ -6,14 +6,25 @@
 #define JP_KANA LANGUAGE_1
 #define JP_EISU LANGUAGE_2
 
+#define MAC       0
+#define MAC_FN    1
+#define MAC_NUM   2
+#define MAC_ARROW 3
+#define WIN       4
+#define WIN_FN    5
+#define WIN_NUM   6
+#define WIN_ARROW 7
+#define MOUSE     8
+#define BT        9
+
 &mt {
     flavor = "balanced";
     quick-tap-ms = <0>;
 };
 
 &trackball {
-    automouse-layer = <4>;
-    scroll-layers = <5>;
+    automouse-layer = <MOUSE>;
+    scroll-layers = <BT>;
 
     // arrows {
     //     layers = <3>;
@@ -45,6 +56,13 @@
         muhennkann {
             bindings = <&to_layer_0 INT_MUHENKAN>;
             key-positions = <11 10>;
+            layers = <MAC MAC_FN MAC_NUM MAC_ARROW>;
+        };
+
+        muhennkann_win {
+            bindings = <&to_layer_win INT_MUHENKAN>;
+            key-positions = <11 10>;
+            layers = <WIN WIN_FN WIN_NUM WIN_ARROW>;
         };
 
         double_quotation {
@@ -62,28 +80,28 @@
         to_layer_0: to_layer_0 {
             compatible = "zmk,behavior-macro-one-param";
             #binding-cells = <1>;
-            bindings = <&to 0 &macro_param_1to1 &kp MACRO_PLACEHOLDER>;
+            bindings = <&to MAC &macro_param_1to1 &kp MACRO_PLACEHOLDER>;
             label = "TO_LAYER_0";
         };
 
-        to_layer_6: to_layer_6 {
+        to_layer_win: to_layer_win {
             compatible = "zmk,behavior-macro-one-param";
             #binding-cells = <1>;
-            bindings = <&to 6 &macro_param_1to1 &kp MACRO_PLACEHOLDER>;
-            label = "TO_LAYER_6";
+            bindings = <&to WIN &macro_param_1to1 &kp MACRO_PLACEHOLDER>;
+            label = "TO_LAYER_WIN";
         };
 
         to_mac: to_mac {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <&none &bt BT_SEL 0 &to 0>;
+            bindings = <&none &bt BT_SEL 0 &to MAC>;
             label = "TO_MAC";
         };
 
         to_win: to_win {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <&none &bt BT_SEL 1 &to 6>;
+            bindings = <&none &bt BT_SEL 1 &to WIN>;
             label = "TO_WIN";
         };
     };
@@ -98,10 +116,10 @@
             tapping-term-ms = <200>;
         };
 
-        lt_to_layer_6: lt_to_layer_6 {
+        lt_to_layer_win: lt_to_layer_win {
             compatible = "zmk,behavior-hold-tap";
-            label = "LAYER_TAP_TO_6";
-            bindings = <&mo>, <&to_layer_6>;
+            label = "LAYER_TAP_TO_WIN";
+            bindings = <&mo>, <&to_layer_win>;
 
             #binding-cells = <2>;
             tapping-term-ms = <200>;
@@ -116,7 +134,7 @@
 &kp Q      &kp W         &kp E         &kp R                        &kp T                                                          &kp Y        &kp U  &lt 0 I    &kp O    &kp P
 &kp A      &kp S         &kp D         &kp F                        &kp G        &kp LS(LG(S))                    &kp MINUS        &kp H        &kp J  &kp K      &kp L    &kp COLON
 &kp Z      &kp X         &kp C         &kp V                        &kp B        &kp LEFT_SHIFT                   &kp RIGHT_SHIFT  &kp N        &kp M  &kp COMMA  &kp DOT  &kp SLASH
-&kp GLOBE  &kp LEFT_WIN  &kp LEFT_ALT  &lt_to_layer_0 1 LANGUAGE_2  &lt 2 SPACE  &lt_to_layer_0 3 LANGUAGE_1      &kp BACKSPACE    &lt 5 ENTER                             &kp DEL
+&kp GLOBE  &kp LEFT_WIN  &kp LEFT_ALT  &lt_to_layer_0 MAC_FN LANGUAGE_2  &lt MAC_NUM SPACE  &lt_to_layer_0 MAC_ARROW LANGUAGE_1      &kp BACKSPACE    &lt BT ENTER                             &kp DEL
             >;
 
             sensor-bindings = <&inc_dec_kp PG_UP PAGE_DOWN>;
@@ -151,30 +169,12 @@
             sensor-bindings = <&inc_dec_kp LC(PAGE_UP) LC(PAGE_DOWN)>;
         };
 
-        mac_mouse {
-            bindings = <
-&trans  &trans  &trans  &trans  &trans                      &trans  &trans    &trans    &trans    &trans
-&trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &mkp MB1  &mkp MB4  &mkp MB2  &trans
-&trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans    &trans    &trans    &trans
-&trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans                                &trans
-            >;
-        };
-
-        set_bluetooth {
-            bindings = <
-&trans  &trans        &trans        &trans        &trans                           &to_mac  &to_win  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4
-&trans  &trans        &trans        &trans        &trans  &trans      &trans       &trans   &trans   &trans        &trans        &trans
-&trans  &kp NUMBER_1  &kp NUMBER_2  &kp NUMBER_3  &trans  &trans      &bootloader  &trans   &trans   &trans        &trans        &bt BT_CLR
-&trans  &trans        &trans        &trans        &trans  &trans      &trans       &trans                                        &bt BT_CLR_ALL
-            >;
-        };
-
         win_default {
             bindings = <
 &kp Q      &kp W      &kp E         &kp R                        &kp T                                                          &kp Y        &kp U  &lt 0 I    &kp O    &kp P
 &kp A      &kp S      &kp D         &kp F                        &kp G        &kp LS(LG(S))                    &kp MINUS        &kp H        &kp J  &kp K      &kp L    &kp COLON
 &kp Z      &kp X      &kp C         &kp V                        &kp B        &kp LEFT_SHIFT                   &kp RIGHT_SHIFT  &kp N        &kp M  &kp COMMA  &kp DOT  &kp SLASH
-&kp GLOBE  &kp RCTRL  &kp LEFT_ALT  &lt_to_layer_6 7 LANGUAGE_2  &lt 8 SPACE  &lt_to_layer_6 9 LANGUAGE_1      &kp BACKSPACE    &lt 5 ENTER                             &kp DEL
+&kp GLOBE  &kp RCTRL  &kp LEFT_ALT  &lt_to_layer_win WIN_FN LANGUAGE_2  &lt WIN_NUM SPACE  &lt_to_layer_win WIN_ARROW LANGUAGE_1      &kp BACKSPACE    &lt BT ENTER                             &kp DEL
             >;
 
             sensor-bindings = <&inc_dec_kp PG_UP PAGE_DOWN>;
@@ -207,6 +207,24 @@
             >;
 
             sensor-bindings = <&inc_dec_kp LC(PAGE_UP) LC(PAGE_DOWN)>;
+        };
+
+        mouse {
+            bindings = <
+&trans  &trans  &trans  &trans  &trans                      &trans  &trans    &trans    &trans    &trans
+&trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &mkp MB1  &mkp MB4  &mkp MB2  &trans
+&trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans    &trans    &trans    &trans
+&trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans                                &trans
+            >;
+        };
+
+        set_bluetooth {
+            bindings = <
+&trans  &trans        &trans        &trans        &trans                           &to_mac  &to_win  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4
+&trans  &trans        &trans        &trans        &trans  &trans      &trans       &trans   &trans   &trans        &trans        &trans
+&trans  &kp NUMBER_1  &kp NUMBER_2  &kp NUMBER_3  &trans  &trans      &bootloader  &trans   &trans   &trans        &trans        &bt BT_CLR
+&trans  &trans        &trans        &trans        &trans  &trans      &trans       &trans                                        &bt BT_CLR_ALL
+            >;
         };
     };
 };
