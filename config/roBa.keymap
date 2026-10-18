@@ -43,7 +43,7 @@
         };
 
         muhennkann {
-            bindings = <&to_mac INT_MUHENKAN>;
+            bindings = <&to_layer_0 INT_MUHENKAN>;
             key-positions = <11 10>;
         };
 
@@ -59,11 +59,25 @@
     };
 
     macros {
-        to_mac: to_layer_0 {
+        to_layer_0: to_layer_0 {
+            compatible = "zmk,behavior-macro-one-param";
+            #binding-cells = <1>;
+            bindings = <&to 0 &macro_param_1to1 &kp MACRO_PLACEHOLDER>;
+            label = "TO_LAYER_0";
+        };
+
+        to_layer_6: to_layer_6 {
+            compatible = "zmk,behavior-macro-one-param";
+            #binding-cells = <1>;
+            bindings = <&to 6 &macro_param_1to1 &kp MACRO_PLACEHOLDER>;
+            label = "TO_LAYER_6";
+        };
+
+        to_mac: to_mac {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             bindings = <&none &bt BT_SEL 0 &to 0>;
-            label = "TO_LAYER_0";
+            label = "TO_MAC";
         };
 
         to_win: to_win {
@@ -78,7 +92,16 @@
         lt_to_layer_0: lt_to_layer_0 {
             compatible = "zmk,behavior-hold-tap";
             label = "LAYER_TAP_TO_0";
-            bindings = <&mo>, <&to_mac>;
+            bindings = <&mo>, <&to_layer_0>;
+
+            #binding-cells = <2>;
+            tapping-term-ms = <200>;
+        };
+
+        lt_to_layer_6: lt_to_layer_6 {
+            compatible = "zmk,behavior-hold-tap";
+            label = "LAYER_TAP_TO_6";
+            bindings = <&mo>, <&to_layer_6>;
 
             #binding-cells = <2>;
             tapping-term-ms = <200>;
@@ -151,7 +174,7 @@
 &kp Q      &kp W      &kp E         &kp R                        &kp T                                                          &kp Y        &kp U  &lt 0 I    &kp O    &kp P
 &kp A      &kp S      &kp D         &kp F                        &kp G        &kp LS(LG(S))                    &kp MINUS        &kp H        &kp J  &kp K      &kp L    &kp COLON
 &kp Z      &kp X      &kp C         &kp V                        &kp B        &kp LEFT_SHIFT                   &kp RIGHT_SHIFT  &kp N        &kp M  &kp COMMA  &kp DOT  &kp SLASH
-&kp GLOBE  &kp RCTRL  &kp LEFT_ALT  &lt_to_layer_0 7 LANGUAGE_2  &lt 8 SPACE  &lt_to_layer_0 9 LANGUAGE_1      &kp BACKSPACE    &lt 5 ENTER                             &kp DEL
+&kp GLOBE  &kp RCTRL  &kp LEFT_ALT  &lt_to_layer_6 7 LANGUAGE_2  &lt 8 SPACE  &lt_to_layer_6 9 LANGUAGE_1      &kp BACKSPACE    &lt 5 ENTER                             &kp DEL
             >;
 
             sensor-bindings = <&inc_dec_kp PG_UP PAGE_DOWN>;
